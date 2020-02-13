@@ -1,5 +1,5 @@
-import React, { useState,Fragment } from 'react'
-import { Row, Accordion,Card, Button, Col  } from 'react-bootstrap';
+import React from 'react'
+import { Row, Accordion,Card, Col  } from 'react-bootstrap';
 
 
 export default function StaggeredText() {

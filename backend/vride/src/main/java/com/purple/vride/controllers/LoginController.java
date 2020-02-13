@@ -6,13 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.purple.vride.models.User;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.purple.vride.repositories.UserRepository;
+import com.purple.vride.services.PasswordHasher;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class LoginController {
 	
 	@Autowired
@@ -20,7 +23,7 @@ public class LoginController {
 	
 	
 	@PostMapping("/login")
-	public String logIn(@RequestParam String id, @RequestParam String password)
+	public String logIn(@RequestParam("id") String id, @RequestParam("password") String password)
 	{
 		List<User> users = (List<User>) userRepository.findAll();
 		StringBuilder response = new StringBuilder("");
@@ -32,7 +35,9 @@ public class LoginController {
 				User us = (User) iter.next();
 				if(id.equals(""+us.getId()))
 				{
-					if(us.getPassword().equals(password))
+					PasswordHasher ph = new PasswordHasher(password);
+					String hash = ph.getHash();
+					if(hash.equals(us.getPassword()))
 					{
 						response.append("SUCCESS");
 					}

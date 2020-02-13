@@ -3,15 +3,21 @@ import {  Container,  Row, Col, Jumbotron } from 'react-bootstrap';
 import LoginForm from './LoginForm';
 import StaggeredText from './StaggeredText';
 import '../App.css'
+import { AuthContext } from '../Contexts/AuthContext';
 
 
 export default class HomePage extends Component {
+
+    static contextType = AuthContext;
     render() {
+
+        const { isLoggedIn } = this.context;
+        console.log(isLoggedIn);
         return (
             <div >
             <Row>
                 <Col xs lg={9}>
-                    <Jumbotron style = {{"marginLeft" : "25px", marginTop: "10px", minHeight: "330px"}}>
+                    <Jumbotron style = {{"marginLeft" : "25px", "marginTop": "10px", "minHeight": "330px"}}>
                         <Row>
                             <Col  xs = {6}>
                                 <div id="cont">
