@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Card, Form, Button} from 'react-bootstrap';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default function LoginForm() {
 
@@ -41,7 +42,7 @@ export default function LoginForm() {
                         </Card.Title>
                         <Card.Body>
                             <Form  >
-                                <Form.Control type="text" value = {empId} placeholder="Employee ID"
+                                <Form.Control type="text" value = {empId} placeholder= "Employee ID"
                                     onChange = {(e) => {
                                         setEmpId(e.target.value);
                                     }}
@@ -54,8 +55,10 @@ export default function LoginForm() {
                                 <br/>
                                 <Form.Check type="checkbox" label="Keep me signed in." style = {{color: "white"}}/>
                                 <br/>
-                                <Button variant="light" onClick = {submitted} >Log In</Button> <br/>
+                                <Button variant="primary" onClick = {submitted} >Log In</Button> <br/>
+                                <h6 style = {{color:"skyblue", marginTop: "25px", padding:"5px", cursor: "pointer"}}>Not a registered user? Sign Up!</h6>
                                 <h6 style = {{color:"red", marginTop: "25px", padding:"5px"}}>{errorMessage}</h6>
+                               
                             </Form>
                         </Card.Body>
                     </Card.Body>
