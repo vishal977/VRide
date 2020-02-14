@@ -14,11 +14,19 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
 @Entity
-@Table(name = "auth_user")
+@Table(name = "user")
 public class User {
 	
+	public User(int id, String firstName, String lastName, String email, String password, String status) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.status = status;
+	}
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "employee_id")
 	private int id;
 	
@@ -37,9 +45,9 @@ public class User {
 	@Column(name = "status")
 	private String status;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "auth_user_role", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "auth_role_id"))
-	private Set<Role> roles;
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(name = "auth_user_role", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "auth_role_id"))
+//	private Set<Role> roles;
 
 	public int getId() {
 		return id;
@@ -89,13 +97,16 @@ public class User {
 		this.status = status;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
+//	public Set<Role> getRoles() {
+//		return roles;
+//	}
+//
+//	public void setRoles(Set<Role> roles) {
+//		this.roles = roles;
+//	}
+	
+	public User()
+	{}
 	
 	
 

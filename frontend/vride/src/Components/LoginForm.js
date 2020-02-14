@@ -16,8 +16,8 @@ export default function LoginForm() {
         const idParam = empId;
         const passwordParam = password;
 
-        const requestURL = baseURL + "?id=" + idParam + "&password=" + passwordParam; 
-        axios.post(requestURL, {
+        //const requestURL = baseURL + "?id=" + idParam + "&password=" + passwordParam; 
+        axios.post(baseURL, {
             id: idParam,
             password: passwordParam
           })
