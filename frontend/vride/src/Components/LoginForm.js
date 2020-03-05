@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import {Card, Form, Button} from 'react-bootstrap';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { usePosition } from 'use-position';
 
 export default function LoginForm() {
 
     const [empId, setEmpId] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-
+    const { latitude, longitude, timestamp, accuracy, error } = usePosition();
     const submitted = (e) =>
     {
         //http://localhost:8080/login?id=i&password=password007
@@ -16,7 +16,6 @@ export default function LoginForm() {
         const idParam = empId;
         const passwordParam = password;
 
-        //const requestURL = baseURL + "?id=" + idParam + "&password=" + passwordParam; 
         axios.post(baseURL, {
             id: idParam,
             password: passwordParam
