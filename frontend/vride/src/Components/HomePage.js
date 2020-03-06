@@ -12,7 +12,6 @@ export default class HomePage extends Component {
     render() {
 
         const { isLoggedIn } = this.context;
-        console.log(isLoggedIn);
         return (
             <div >
             <Row>

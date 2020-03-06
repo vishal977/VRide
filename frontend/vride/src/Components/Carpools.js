@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Row, Col, Form, Button} from 'react-bootstrap';
+import {Card, Row, Col, Form, Button, CardDeck} from 'react-bootstrap';
 import CarpoolFeed from './CarpoolFeed';
 
 export default function Carpools() {
@@ -22,14 +22,11 @@ export default function Carpools() {
                     </Row>
                     <Row style = {{"marginTop" : "20px"}}>
                         <Col>
-                            <Card bg = "secondary">
+                            <CardDeck>
                                 <Card.Body>
                                     <CarpoolFeed/>
-                                    <CarpoolFeed/>
-                                    <CarpoolFeed/>
-                                    <CarpoolFeed/>
                                 </Card.Body>
-                            </Card>
+                            </CardDeck>
                         </Col>
                     </Row>
                 </Card.Body>
