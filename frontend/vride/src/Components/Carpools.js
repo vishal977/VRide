@@ -1,6 +1,7 @@
 import React from 'react'
 import {Card, Row, Col, Form, Button, CardDeck} from 'react-bootstrap';
 import CarpoolFeed from './CarpoolFeed';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 export default function Carpools() {
     return (
@@ -24,7 +25,9 @@ export default function Carpools() {
                         <Col>
                             <CardDeck>
                                 <Card.Body>
-                                    <CarpoolFeed/>
+                                    <Scrollbars style = {{"height" : "250px"}} autoHide>
+                                        <CarpoolFeed/>
+                                    </Scrollbars>
                                 </Card.Body>
                             </CardDeck>
                         </Col>

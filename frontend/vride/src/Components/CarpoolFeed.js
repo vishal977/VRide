@@ -1,12 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Row, Card, Col, Image } from 'react-bootstrap';
-import { CarpoolContext } from '../Contexts/CarpoolContext';
 import profile from '../Images/profile.jpg'
+import axios from 'axios';
 
-export default class CarpoolFeed extends Component {
-    static contextType = CarpoolContext;
-    render() {
-        const { carpools } = this.context;
+export default function CarpoolFeed() {
+
+        const [carpools, setCarpools] = useState("");
+        const baseURL = "http://localhost:8080/carpools";
+        axios.get(baseURL)
+            .then(res => {
+                setCarpools(res.data);
+            })
 
         const allCarpools = carpools;
         var arr = [];
@@ -17,10 +21,10 @@ export default class CarpoolFeed extends Component {
         const data = arr.length ? (
             arr.map(arr => {
                 return (
-                    <div key = {arr.id}>
+                    <div key = {arr.carpoolId}>
                         <Card bg = "white" style = {{"marginTop" : "15px", "cursor" : "pointer"}}>
                             <Row>
-                                <Col md = "auto">
+                                <Col md = "5">
                                     <Image src= { profile } roundedCircle 
                                     style = {{ 
                                         "height" : "50px", 
@@ -28,7 +32,7 @@ export default class CarpoolFeed extends Component {
                                         "margin" : "5px", 
                                         "padding" : "2px"}} 
                                     />
-                                        <b><span>{ arr.carPoolOwner }</span></b> <br></br>
+                                        <b><span>{ arr.ownerName }</span></b> <br></br>
                                 </Col>
                                 <Col>
                                     <span style = {{"padding" : "2px"}}><b>From:</b> { arr.fromLocation }</span> <br/>
@@ -54,4 +58,4 @@ export default class CarpoolFeed extends Component {
         
     )
     }
-}
+
