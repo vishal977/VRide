@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Card, Row, Col, Form, Button, CardDeck} from 'react-bootstrap';
 import CarpoolFeed from './CarpoolFeed';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 export default function Carpools() {
+    const[searchQuery, updateSearchQuery] = useState("");
     return (
         <div>
             <Card bg="light" style={{ "width": "45rem", "marginTop": "10px", "marginLeft" : "20px" }}>
@@ -32,11 +33,6 @@ export default function Carpools() {
                             </CardDeck>
                         </Col>
                     </Row>
-                </Card.Body>
-                <Card.Body>
-                    <Button variant = "primary">
-                        Join!
-                    </Button>
                 </Card.Body>
             </Card>
         </div>

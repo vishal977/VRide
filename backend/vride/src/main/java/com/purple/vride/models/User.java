@@ -1,5 +1,12 @@
 package com.purple.vride.models;
 
+/**
+ * @author Vishal N 
+ * @date February 15, 2020.
+ * @version 1.0
+ * 
+*/
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -96,6 +103,8 @@ public class User {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public User() {} 
 
 //	public Set<Role> getRoles() {
 //		return roles;
@@ -103,14 +112,5 @@ public class User {
 //
 //	public void setRoles(Set<Role> roles) {
 //		this.roles = roles;
-//	}
-	
-	public User()
-	{}
-	
-	
-
-	
-	
-
+//	}	
 }

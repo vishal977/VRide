@@ -1,12 +1,15 @@
 package com.purple.vride.controllers;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+/**
+ * @author Vishal N 
+ * @date February 15, 2020.
+ * @version 1.0
+ * 
+*/
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.purple.vride.models.User;
@@ -14,12 +17,12 @@ import com.purple.vride.models.User;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.purple.vride.repositories.SignedInRepository;
 import com.purple.vride.repositories.UserRepository;
 import com.purple.vride.services.PasswordHasher;
-import com.purple.vride.models.Role;
+import com.purple.vride.models.SignedIn;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -27,6 +30,8 @@ public class LoginController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private SignedInRepository signedInRepository;
 	
 	
 	@PostMapping("/login")
@@ -50,6 +55,7 @@ public class LoginController {
 				{
 					PasswordHasher ph = new PasswordHasher(password);
 					String hash = ph.getHash();
+					System.out.println(hash);
 					if(hash.equals(us.getPassword()))
 					{
 						response.append("SUCCESS");
@@ -92,6 +98,40 @@ public class LoginController {
 			return e.getMessage().toString();
 		}
 		
+	}
+	
+	@PostMapping("checksignin")
+	public boolean isSignedIn(@RequestBody Map<String,Object> details)
+	{
+		int id = Integer.parseInt("" + details.get("empid"));
+		boolean signedIn = false;
+		List<SignedIn> list= (List<SignedIn>) signedInRepository.findAll();
+		Iterator iter = list.iterator();
+		while(iter.hasNext())
+		{
+			SignedIn s = (SignedIn) iter.next();
+			if(s.getEmpid() == id)
+			{
+				signedIn = true;
+			}
+		}
+		return signedIn;
+	}
+	
+	@PostMapping("signout")
+	public String signOut(@RequestBody Map<String,Object> details)
+	{
+		int id = Integer.parseInt("" + details.get("empid"));
+		String firstname = (String) details.get("firstname");
+		SignedIn entity = new SignedIn(id,firstname);
+		try {
+		signedInRepository.delete(entity);
+		return "SUCCESS";
+		}
+		catch(Exception e)
+		{
+			return "FAILURE";
+		}
 	}
 	
 	

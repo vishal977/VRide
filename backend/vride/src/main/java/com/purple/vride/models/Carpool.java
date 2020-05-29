@@ -1,4 +1,12 @@
 package com.purple.vride.models;
+
+/**
+ * @author Vishal N 
+ * @date February 15, 2020.
+ * @version 1.0
+ * 
+*/
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,19 +15,26 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "carpools")
 public class Carpool {
+	
 	@Id
 	@Column(name = "carpoolid")
 	private int carpoolId;
+	
 	@Column(name = "ownerid")
 	private int ownerId;
+	
 	@Column(name = "ownername")
 	private String ownerName;
+	
 	@Column(name = "fromlocation")
 	private String fromLocation;
+	
 	@Column(name = "vehicle")
 	private String vehicle;
+	
 	@Column(name = "regno")
 	private String regno;
+	
 	@Column(name = "noofseats")
 	private int noOfSeats;
 	
@@ -65,8 +80,13 @@ public class Carpool {
 	public void setNoOfSeats(int noOfSeats) {
 		this.noOfSeats = noOfSeats;
 	}
+	
+	public Carpool() {
+		
+	}
 	public Carpool(int carpoolId, int ownerId, String ownerName, String fromLocation, String vehicle, String regno,
 			int noOfSeats) {
+		
 		super();
 		this.carpoolId = carpoolId;
 		this.ownerId = ownerId;
@@ -77,8 +97,5 @@ public class Carpool {
 		this.noOfSeats = noOfSeats;
 	}
 	
-	public Carpool()
-	{
-		
-	}
+	
 }

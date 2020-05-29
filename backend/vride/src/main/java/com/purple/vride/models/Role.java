@@ -1,5 +1,12 @@
 package com.purple.vride.models;
 
+/**
+ * @author Vishal N 
+ * @date February 15, 2020.
+ * @version 1.0
+ * 
+*/
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "auth_role")
 public class Role {
+	
 	public Role(int id) {
 		this.id = id;
 	}
