@@ -31,7 +31,7 @@ export default function LoginForm() {
 
     return (
        
-        <Card style = { {width: "20rem", "marginTop": "10px"} } bg = "dark">
+        <Card style = { {width: "20rem", "marginTop": "10px", "marginRight" : "30px"} } bg = "dark">
             <Card.Body>
                 <Card.Title style = { {color: "white"} }>
                     Login to your account

@@ -13,7 +13,7 @@ export default function SignUp() {
     const[imageSelect, changeImageSelect] = useState("");
 
     return (
-       <Card style = { {width: "20rem", "marginTop": "10px"} } bg = "dark">
+       <Card style = { {width: "20rem", "marginTop": "10px", "marginLeft" : "600px"} } bg = "dark">
             <Card.Body>
                 <Card.Title style = { {color: "white"} }>
                     Sign Up

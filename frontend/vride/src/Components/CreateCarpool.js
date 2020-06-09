@@ -1,7 +1,9 @@
 //General imports.
 import React, { useState } from 'react';
-import { Row, Card, Col, Image, Form, ButtonGroup, Button, InputGroup, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Row, Card, Col, Form, Button, } from 'react-bootstrap';
 
+//Resource imports.
+import { SELECT_DAY, SELECT_MONTH, SELECT_TOD } from '../Res/constants';
 
 //Functional component - CreateCarpool.
 export default function CreateCarpool() {
@@ -16,13 +18,33 @@ export default function CreateCarpool() {
     const[month, setMonth] = useState("");
     const[tod, setTod] = useState("");
 
+    //Error message hook. 
+    const[errorMessage, setErrorMessage] = useState("");
+
     //Function to handle form submission.
     const submitted = (e) => {
-        // console.log("submitted");
+        console.log(fromLocation + "\n" + toLocation + "\n" + vehicle + "\n" + regno
+        + "\n" + noOfSeats + "\n" + day + "\n" + month + "\n" + tod )
     }
+
+    //Render templates for days. 
+    let days = SELECT_DAY.map((day) =>
+                <option value = { day }>{ day }</option>
+            );
+
+    //Render template for months.
+    let months = SELECT_MONTH.map((month) =>
+                <option value = { month.value }>{ month.name }</option>
+            );
+
+    //Render template for time of day. 
+    let timeOfDay = SELECT_TOD.map((t) =>
+                <option value = { t }>{ t }</option>
+            );
+
     
     return (
-        <Card style = { {"marginLeft" : "15px", "marginTop" : "15px" } }>
+        <Card style = { {"marginLeft" : "15px", "marginTop" : "10px", "marginRight" : "20px" } }>
             <Card.Title style = { {"padding" : "10px"} }>
                 <h3> Create a Carpool </h3>
             </Card.Title>
@@ -66,24 +88,14 @@ export default function CreateCarpool() {
                             <Form.Control as = "select" onChange = {(e) => {
                                     setDay(e.target.value);
                                 }}>
-                                <option>Select Day</option>
-                                <option>1</option> <option>2</option>  <option>3</option>  <option>4</option>  <option>5</option> 
-                                <option>6</option>  <option>7</option>  <option>8</option>  <option>9</option>  <option>10</option> 
-                                <option>11</option>  <option>12</option>  <option>13</option>  <option>14</option>  <option>15</option> 
-                                <option>16</option>  <option>17</option>  <option>18</option>  <option>19</option>  <option>20</option> 
-                                <option>21</option>  <option>22</option>  <option>23</option>  <option>24</option>  <option>25</option> 
-                                <option>26</option>  <option>27</option>  <option>28</option>  <option>29</option>  <option>30</option> 
-                                <option>31</option> 
+                                { days }
                             </Form.Control>
                         </Col>
                         <Col>
                         <Form.Control as = "select" onChange = {(e) => {
                                     setMonth(e.target.value);
                                 }}>
-                                <option>Select Month</option>
-                                <option>Janj</option> <option>Feb</option>  <option>Mar</option>  <option>Apr</option>  <option>May</option> 
-                                <option>Jun</option>  <option>Jul</option>  <option>Aug</option>  <option>Sep</option>  <option>Oct</option> 
-                                <option>Nov</option>  <option>Dec</option>
+                                { months }
                             </Form.Control>
                         </Col>
                     </Row>
@@ -91,15 +103,16 @@ export default function CreateCarpool() {
                     <Col md = "3">
                         <Form.Control as = "select" onChange = {(e) => {
                                     setTod(e.target.value);
-                                    console.log(tod);
                                 }}>
-                                <option>Select time of day</option>
-                                <option>AM</option> <option>PM</option> 
+                                { timeOfDay }
                             </Form.Control>
                     </Col>
                     </Row>
                     <Row style = {{"marginTop" : "20px", "marginLeft" : "4px"}}>
                         <Button variant = "primary" onClick = {submitted}>Create!</Button>
+                    </Row>
+                    <Row style = {{"marginTop" : "20px", "color" : "red"}}>
+                        <span> { errorMessage } </span>   
                     </Row>
                 </Form>
             </Card.Body>

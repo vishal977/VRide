@@ -1,11 +1,16 @@
+//General imports
 import React,  { Component, createContext } from 'react';
 import axios from 'axios';
+
+//Constant imports. 
+import { CHECK_SIGNED_IN_URL, LOGIN_URL, SIGNOUT_URL, SIGNUP_URL } from '../Res/constants';
+
 export const AuthContext = createContext();
 
 export default class AuthContextProvider extends Component {
 
     state = {
-        isLoggedIn: false,
+        isLoggedIn: true,
         employeeID : 2,
         firstname: 'Vishal',
         errorMessage: 'NaN'
@@ -23,7 +28,7 @@ export default class AuthContextProvider extends Component {
         if(!(emp === "NONE"))
         {
             //console.log("Request sent");
-            axios.post("http://localhost:8080/checksignin", {
+            axios.post(CHECK_SIGNED_IN_URL, {
                 empid: emp,
                 firstname: fn
             }).then(isLoggedIn => {
@@ -52,7 +57,7 @@ export default class AuthContextProvider extends Component {
 
     login = (details) =>
     {
-        const baseURL = "http://localhost:8080/login"
+        const baseURL = LOGIN_URL;
         const idParam = details.empId;
         const passwordParam = details.password;
         const keepMeSignedIn = details.keepMeSignedIn;
@@ -85,7 +90,7 @@ export default class AuthContextProvider extends Component {
 
     signOut = (user) => {
 
-        axios.post("http://localhost:8080/signout", {
+        axios.post(SIGNOUT_URL, {
             empid: user.empid,
             firstname: user.firstname
         }).then(res => {
@@ -105,6 +110,12 @@ export default class AuthContextProvider extends Component {
                 console.log("FAILURE");
             }
         })
+    }
+
+
+    signUp = (user) => {
+
+
     }
 
 

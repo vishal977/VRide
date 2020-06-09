@@ -1,6 +1,7 @@
 //General imports.
 import React, { Component } from 'react'
 import { Row, Col } from 'react-bootstrap';
+import { motion } from 'framer-motion';
 
 //Component imports.
 import LoginForm from './LoginForm';
@@ -38,15 +39,15 @@ export default class HomePage extends Component {
         else
         {
             return (
-               <div >
-                <Row>
-                    <Col xs lg={9}>
-                        <Carpools/>
-                    </Col>
-                    <Col>
-                        <LoginForm/>
-                    </Col>
-                </Row>
+               <div>
+                    <Row>
+                        <Col xs lg={9}>
+                            <Carpools/>
+                        </Col>
+                        <Col>
+                            <LoginForm/>
+                        </Col>
+                    </Row>
                 </div>
             )
         }
