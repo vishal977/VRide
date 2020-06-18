@@ -34,3 +34,8 @@ export const SELECT_MONTH = [
                                 {"value": 12, "name": "Dec"}
                             ]
 export const SELECT_TOD = ["Time of Day", "AM", "PM"]
+export const DATE_FORMAT = 'YYYY-MMY-DD'
+export const TIME_FORMAT = 'HH:mm'
+
+//Maps API 
+export const API_TOKEN = 'AIzaSyDp7Mg6f15W5wGeWjKClAWQCXuzgWxhjvw';

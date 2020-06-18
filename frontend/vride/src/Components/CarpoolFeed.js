@@ -5,7 +5,7 @@ import axios from 'axios';
 import { usePosition } from 'use-position';
 
 //Resource imports
-import profile from '../Images/profile.jpg';
+import profile from '../Res/Images/profile.jpg';
 import { CARPOOL_URL, NO_CARPOOLS, DIST_KMS, DIST_METRES } from '../Res/constants';
 
 //Geodist library import

@@ -1,9 +1,13 @@
 //General imports.
 import React, { useState } from 'react';
 import { Row, Card, Col, Form, Button, } from 'react-bootstrap';
+import { TimePicker, DatePicker } from 'antd';
+import moment from 'moment';
+import axios from 'axios';
+import 'antd/dist/antd.css';
 
 //Resource imports.
-import { SELECT_DAY, SELECT_MONTH, SELECT_TOD } from '../Res/constants';
+import { SELECT_DAY, SELECT_MONTH, SELECT_TOD, DATE_FORMAT, TIME_FORMAT } from '../Res/constants';
 
 //Functional component - CreateCarpool.
 export default function CreateCarpool() {
@@ -14,17 +18,57 @@ export default function CreateCarpool() {
     const[vehicle, setVehicle] = useState("");
     const[regno, setRegno] = useState("");
     const[noOfSeats, setNoOfSeats] = useState("");
-    const[day, setDay] = useState("");
-    const[month, setMonth] = useState("");
-    const[tod, setTod] = useState("");
+    const[date, setDate] = useState("");
+    const[time, setTime] = useState("");
+
 
     //Error message hook. 
     const[errorMessage, setErrorMessage] = useState("");
 
     //Function to handle form submission.
     const submitted = (e) => {
-        console.log(fromLocation + "\n" + toLocation + "\n" + vehicle + "\n" + regno
-        + "\n" + noOfSeats + "\n" + day + "\n" + month + "\n" + tod )
+        
+        if(checkValidSchedule({"date" : date, "time" : time}))  { 
+            
+            setErrorMessage("");
+        } 
+        else {
+            setErrorMessage("Invalid schedule!")
+        }
+        
+    }
+
+    //Check if the date and time user provides are valid.
+    const checkValidSchedule = (schedule) => {
+        const now = moment();
+        const scheduledDate = moment(schedule.date,'YYYY-MM-DD');
+        var dateDiff = scheduledDate.diff(now,'days');
+
+        const scheduledTime = moment(schedule.time,'HH:mm');
+        var timeDiff = scheduledTime.diff(now,'seconds');
+        
+        if(dateDiff === 0) {
+            if(timeDiff > 0)
+                return true;
+            else
+                return false;
+        }
+        else if(dateDiff < 0) {
+           return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    //Function to format the user specified time to suitable format.
+    const setTimeHelper = (timeObject) => {
+        setTime(moment(timeObject).format(TIME_FORMAT));
+    }
+
+    //Function to format the user specified date to suitable format.
+    const setDateHelper = (dateObject) => {
+        setDate(moment(dateObject).format('YYYY-MM-DD'));
     }
 
     //Render templates for days. 
@@ -77,36 +121,26 @@ export default function CreateCarpool() {
                         </Col>
                     </Row>
                     <Row style = {{"marginTop" : "20px"}} >
-                        <Col md = "3">
+                        <Col md = "4">
                             <Form.Control placeholder = "Number of seats"
                                 onChange = {(e) => {
                                     setNoOfSeats(e.target.value);
                                 }}
                             />
                         </Col>
-                        <Col>
-                            <Form.Control as = "select" onChange = {(e) => {
-                                    setDay(e.target.value);
-                                }}>
-                                { days }
-                            </Form.Control>
+                        <Col md = "3">
+                            <DatePicker onChange={setDateHelper} />
                         </Col>
-                        <Col>
-                        <Form.Control as = "select" onChange = {(e) => {
-                                    setMonth(e.target.value);
-                                }}>
-                                { months }
-                            </Form.Control>
+
+                        <Col md = "3">
+                            <TimePicker
+                                defaultValue={moment('12:08', TIME_FORMAT)}
+                                format={TIME_FORMAT}
+                                onChange = { setTimeHelper }
+                                defaultValue = { '' }
+                                placeholder = {"Select time"}
+                            />    
                         </Col>
-                    </Row>
-                    <Row style = {{"marginTop" : "20px"}}>
-                    <Col md = "3">
-                        <Form.Control as = "select" onChange = {(e) => {
-                                    setTod(e.target.value);
-                                }}>
-                                { timeOfDay }
-                            </Form.Control>
-                    </Col>
                     </Row>
                     <Row style = {{"marginTop" : "20px", "marginLeft" : "4px"}}>
                         <Button variant = "primary" onClick = {submitted}>Create!</Button>

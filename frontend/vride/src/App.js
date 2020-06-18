@@ -1,7 +1,7 @@
-//React and CSS Imports.
+//General imports.
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 //Component imports.
 import NavigationBar from './Components/NavigationBar';
@@ -9,20 +9,22 @@ import HomePage from './Components/HomePage';
 import AuthContextProvider from './Contexts/AuthContext';
 import CreateCarpool from './Components/CreateCarpool';
 import SignUp from './Components/SignUp';
+import MapsView from './Components/MapsView';
 
 
 //Functional component - App
 function App() {
   return (
-    <Router>
+    <Switch>
       <AuthContextProvider>
           <NavigationBar/>
           <Route exact path = "/" component = {HomePage}/>
           <Route path = "/home" component = {HomePage}/>
-          <Route exact path = "/create" component = {CreateCarpool}/>
-          <Route exact path = "/signup" component = {SignUp}/>
+          <Route path = "/create" component = {CreateCarpool}/>
+          <Route path = "/signup" component = {SignUp}/>
+          <Route path = "/maps" component = {MapsView}/>
       </AuthContextProvider>
-    </Router>
+    </Switch>
   );
 }
 

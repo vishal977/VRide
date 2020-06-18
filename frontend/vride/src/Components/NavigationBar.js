@@ -5,10 +5,13 @@ import { LinkContainer  } from 'react-router-bootstrap';
 import {AuthContext} from '../Contexts/AuthContext';
 
 //Resource Imports
-import carpool from '../Images/carpool.png';
-import profile from '../Images/profile.jpg';
+import carpool from '../Res/Images/carpool.png';
+import profile from '../Res/Images/profile.jpg';
 import { motion } from 'framer-motion';
 import {APP_NAME, SIGNED_IN_LINKS, SIGNED_OUT_LINKS} from '../Res/constants';
+
+//Animation variants 
+import { navbarAnimation, titleAnimation } from '../Res/animationVariants';
 
 //Functional Component - NavigationBar
 export default function NavigationBar() {
@@ -24,18 +27,21 @@ export default function NavigationBar() {
     {
         //Template if user is logged in.
         return (
-            <motion.div animate = { { y: 0 } } initial = {{y: -100}}>
+            <motion.div variants = { navbarAnimation } initial = "hidden" animate = "visible">
                 <Navbar bg = "primary" variant = "dark" expand = "lg" sticky = "top">
                     <Navbar.Brand href = "/">
-                        <motion.img
-                                initial = {{ opacity: 0 }}
-                                animate = {{ opacity: 1 }}
+                        <img 
                                 src={carpool}
                                 width = "30"
                                 height = "30"
                                 className = "d-inline-block align-top"
                                 alt = "VRide logo"/>
-                        <b style = {{"marginLeft" : "10px"}}> { APP_NAME } </b>
+                        <motion.div style = {{ display : 'inline-block' }} 
+                                    variants = { titleAnimation } 
+                                    initial = "hidden"
+                                    animate = "visible">
+                            <b style = {{"marginLeft" : "10px"}}> { APP_NAME } </b>
+                        </motion.div>
                     </Navbar.Brand>
 
                     <Nav className = "mr-auto"> </Nav>
@@ -80,12 +86,10 @@ export default function NavigationBar() {
     {
         //Template if user is not signed in.
         return(
-            <motion.div animate = { { y : 0 } } initial = {{y: -100}}>
+            <motion.div variants = { navbarAnimation } initial = "hidden" animate = "visible">
                 <Navbar bg = "primary" variant = "dark" expand = "lg" sticky = "top">
                     <Navbar.Brand href = "/">
                         <motion.img
-                            initial = {{ opacity: 0 }}
-                            animate = {{ opacity: 1 }}
                             src={carpool}
                             width = "30"
                             height = "30"
