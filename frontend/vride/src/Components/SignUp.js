@@ -10,10 +10,13 @@ export default function SignUp() {
     const [empId, setEmpId] = useState("");
     const [password, setPassword] = useState("");
     const [passRepeat, setPassRepeat] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
     const[imageSelect, changeImageSelect] = useState("");
 
     return (
-       <Card style = { {width: "20rem", "marginTop": "10px", "marginLeft" : "600px"} } bg = "dark">
+       <Card style = { {width: "25rem", "marginTop": "10px", "marginLeft" : "590px"} } bg = "dark">
             <Card.Body>
                 <Card.Title style = { {color: "white"} }>
                     Sign Up
@@ -26,6 +29,21 @@ export default function SignUp() {
                             }}
                         />
                         <br/>
+                        <Form.Control type = "text" value = { firstName } placeholder = "First Name"
+                            onChange = {(e) => {
+                                setFirstName(e.target.value);
+                            }}/>
+                        <br/>
+                        <Form.Control type = "text" value = { lastName } placeholder = "Last Name"
+                            onChange = {(e) => {
+                                setLastName(e.target.value);
+                            }}/>
+                        <br/>
+                        <Form.Control type = "email" value = { email } placeholder = "Enter email"
+                            onChange = {(e) => {
+                                setEmail(e.target.value);
+                            }}/>
+                        <br/>
                         <Form.Control type = "password" value = { password } placeholder = "Choose password"
                             onChange = {(e) => {
                                 setPassword(e.target.value);
@@ -36,6 +54,8 @@ export default function SignUp() {
                             setPassRepeat(e.target.value);
                         }}/>
                         <br/>
+                        
+                        
                         <Form.Group style = { {"color" : "skyblue"} }>
                             <Form.Label >Upload attested image for KYC</Form.Label>
                             <Form.Control type = "file" onChange = { changeImageSelect }/>

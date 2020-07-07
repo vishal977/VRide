@@ -9,6 +9,8 @@ package com.purple.vride.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,6 +20,7 @@ public class Carpool {
 	
 	@Id
 	@Column(name = "carpoolid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int carpoolId;
 	
 	@Column(name = "ownerid")
@@ -37,6 +40,25 @@ public class Carpool {
 	
 	@Column(name = "noofseats")
 	private int noOfSeats;
+	
+	@Column(name = "date")
+	private String date;
+	
+	@Column(name = "time")
+	private String time;
+	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	
 	public int getCarpoolId() {
 		return carpoolId;
@@ -84,7 +106,7 @@ public class Carpool {
 	public Carpool() {
 		
 	}
-	public Carpool(int carpoolId, int ownerId, String ownerName, String fromLocation, String vehicle, String regno,
+	public Carpool(int ownerId, String ownerName, String fromLocation, String vehicle, String regno,
 			int noOfSeats) {
 		
 		super();

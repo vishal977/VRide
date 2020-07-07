@@ -23,7 +23,7 @@ class MapsView extends Component {
                     zoom = { 20 }
                  />
                  <Marker
-                    title={'Home Sweet Home'}
+                    title={'You are here!'}
                     name={'Home'}
                     position={{lat: 12.988986, lng: 80.116654}} />
             </div>

@@ -39,3 +39,6 @@ export const TIME_FORMAT = 'HH:mm'
 
 //Maps API 
 export const API_TOKEN = 'AIzaSyDp7Mg6f15W5wGeWjKClAWQCXuzgWxhjvw';
+
+//Create Carpool
+export const CREATE_CARPOOL_URL = "http://localhost:8080/createcarpool";

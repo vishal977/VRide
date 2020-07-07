@@ -10,7 +10,7 @@ export const AuthContext = createContext();
 export default class AuthContextProvider extends Component {
 
     state = {
-        isLoggedIn: true,
+        isLoggedIn: false,
         employeeID : 2,
         firstname: 'Vishal',
         errorMessage: 'NaN'
@@ -114,6 +114,31 @@ export default class AuthContextProvider extends Component {
 
 
     signUp = (user) => {
+
+        axios.post(SIGNUP_URL, {
+            empid: user.empid,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            password: user.password,
+            status: "NOT VERIFIED"
+        }).then(res => {
+            if(res.data === "SUCCESS")
+            {
+                localStorage.setItem('empid', null);
+                localStorage.setItem('firstname',null);
+                this.setState({
+                    isLoggedIn: false,
+                    empid: "NONE",
+                    firstname: "NONE",
+                    errorMessage: "NaN"
+                })
+            }
+            else
+            {
+                console.log("FAILURE");
+            }
+        })
 
 
     }

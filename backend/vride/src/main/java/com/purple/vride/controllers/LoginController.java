@@ -10,6 +10,8 @@ package com.purple.vride.controllers;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.purple.vride.models.User;
@@ -28,6 +30,8 @@ import com.purple.vride.models.SignedIn;
 @CrossOrigin(origins = "*")
 public class LoginController {
 	
+	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -37,6 +41,7 @@ public class LoginController {
 	@PostMapping("/login")
 	public String logIn(@RequestBody Map<String,Object> loginParams)
 	{
+		LOGGER.log(Level.FINE, "Log-in initiated.");
 		String id;
 		String password;
 		StringBuilder response = new StringBuilder("");
@@ -69,7 +74,8 @@ public class LoginController {
 		}
 		catch(Exception e)
 		{
-			return e.getMessage();
+			LOGGER.log(Level.SEVERE, "Error logging in: " + e.getMessage());
+			response.append("FAILURE");
 		}
 		
 		return response.toString();
@@ -78,6 +84,7 @@ public class LoginController {
 	@PostMapping("/signUp")
 	public String signUp(@RequestBody Map<String,Object> credentials)
 	{
+		LOGGER.log(Level.FINE, "Sign up initiated.");
 		int id = Integer.parseInt(""+credentials.get("empid"));
 		String firstName = (String) credentials.get("firstname");
 		String lastName = (String) credentials.get("lastname");
@@ -94,8 +101,8 @@ public class LoginController {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			return e.getMessage().toString();
+			LOGGER.log(Level.SEVERE, "Error signing up: " + e.getMessage());
+			return "FAILURE";
 		}
 		
 	}
@@ -103,7 +110,8 @@ public class LoginController {
 	@PostMapping("checksignin")
 	public boolean isSignedIn(@RequestBody Map<String,Object> details)
 	{
-		int id = Integer.parseInt("" + details.get("empid"));
+		LOGGER.log(Level.FINE, "Sign in check initiated.");
+		int id = 2;
 		boolean signedIn = false;
 		List<SignedIn> list= (List<SignedIn>) signedInRepository.findAll();
 		Iterator iter = list.iterator();
@@ -121,6 +129,7 @@ public class LoginController {
 	@PostMapping("signout")
 	public String signOut(@RequestBody Map<String,Object> details)
 	{
+		LOGGER.log(Level.FINE, "Sign out initiated.");
 		int id = Integer.parseInt("" + details.get("empid"));
 		String firstname = (String) details.get("firstname");
 		SignedIn entity = new SignedIn(id,firstname);
@@ -130,6 +139,7 @@ public class LoginController {
 		}
 		catch(Exception e)
 		{
+			LOGGER.log(Level.SEVERE, "Error signing out: " + e.getMessage());
 			return "FAILURE";
 		}
 	}

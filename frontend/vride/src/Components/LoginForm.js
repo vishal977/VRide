@@ -1,6 +1,7 @@
 //General imports.
 import React, {useState, useContext} from 'react'
 import {Card, Form, Button} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 //Component imports.
@@ -31,7 +32,7 @@ export default function LoginForm() {
 
     return (
        
-        <Card style = { {width: "20rem", "marginTop": "10px", "marginRight" : "30px"} } bg = "dark">
+        <Card style = { {width: "20rem", "marginTop": "10px", "marginRight" : "40px"} } bg = "dark">
             <Card.Body>
                 <Card.Title style = { {color: "white"} }>
                     Login to your account
@@ -56,7 +57,7 @@ export default function LoginForm() {
                         />
                         <br/>
                         <Button variant = "primary" onClick = { submitted }>Log In</Button><br/>
-                        <h6 style = { {color:"skyblue", marginTop: "25px", padding:"5px", cursor: "pointer"} }>Not a registered user? Sign Up!</h6>
+                       <Link to = "/signup"> <h6 style = { {color:"skyblue", marginTop: "25px", padding:"5px", cursor: "pointer"} }>Not a registered user? Sign Up!</h6> </Link>
                         <h6 style = { {color:"red", marginTop: "25px", padding:"5px"} }>{ errorMessage }</h6>
                     </Form>
                 </Card.Body>

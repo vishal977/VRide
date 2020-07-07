@@ -60,6 +60,8 @@ export default function CarpoolFeed() {
                                 <span style = { {"padding" : "2px"} }> <b> Vehicle:</b> { arr.vehicle } </span> <br/>
                                 <span style = { {"padding" : "2px"} }> <b> Registration number: </b> { arr.regno } </span> <br/>
                                 <span style = { {"padding" : "2px"} }> <b> No of seats left: </b> { arr.noOfSeats } </span> <br/>
+                                <span style = { {"padding" : "2px"} }> <b> Date </b> { arr.date } </span> <br/>
+                                <span style = { {"padding" : "2px"} }> <b> Time </b> { arr.time } </span> <br/>
                             </Col>
                         </Row>
                     </Card>
